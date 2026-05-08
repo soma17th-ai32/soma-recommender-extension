@@ -5,6 +5,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 
   sendResponse({
     title: document.title,
+    body: document.body?.innerText?.slice(0, 2000),
     url: window.location.href
   });
 });

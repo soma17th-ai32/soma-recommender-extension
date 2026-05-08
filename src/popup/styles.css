@@ -98,3 +98,62 @@ button:disabled {
   font-size: 14px;
   line-height: 1.45;
 }
+
+.result-title {
+  margin: 0 0 8px;
+  color: #172033;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.result-meta {
+  margin: 0 0 12px;
+  color: #637083;
+  font-size: 13px;
+}
+
+.result-code {
+  margin: 10px 0 0;
+  color: #b42318;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.recommendation-list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.recommendation-item {
+  display: grid;
+  gap: 6px;
+  border-top: 1px solid #e9edf3;
+  padding-top: 12px;
+}
+
+.recommendation-item:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.recommendation-item a {
+  color: #3151d3;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.recommendation-item a:hover {
+  text-decoration: underline;
+}
+
+.recommendation-item p {
+  margin: 0;
+}
+
+.reason {
+  color: #4c5a6e;
+  font-size: 13px;
+}
