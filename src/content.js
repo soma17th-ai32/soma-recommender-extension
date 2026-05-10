@@ -1,113 +1,7 @@
-const HISTORY_HOST = "www.swmaestro.ai";
+const HISTORY_HOSTS = ["www.swmaestro.ai", "swmaestro.ai"];
 const HISTORY_PATH = "/sw/mypage/userAnswer/history.do";
 const HISTORY_MENU_NO = "200047";
 const MAX_HISTORY_PAGES = 20;
-const USE_TEST_HISTORIES = true;
-const TEST_HISTORIES = [
-  createTestHistory({
-    id: "11349",
-    type: "\uc790\uc720\uba58\ud1a0\ub9c1",
-    title: "\ud300 \uce60\uc0bc\uc774 - \uba58\ud1a0\uc18c\uac1c, \uba58\ud1a0\ub9c1\ubc29\ud5a5",
-    mentor: "\uc7a5\uc9c4\uc601(6236)",
-    lectureDate: "2026-05-09(\ud1a0) 11:00:00 ~ 12:00:00",
-    registeredAt: "2026-05-06 22:22",
-    status: "\uc811\uc218\uc644\ub8cc",
-    approval: "OK"
-  }),
-  createTestHistory({
-    id: "11278",
-    type: "\uba58\ud1a0\ud2b9\uac15",
-    title: "2026 ASM Mobile Class - KickOff and OT",
-    mentor: "\uae40\uc885\ucc2c",
-    lectureDate: "2026-05-07(\ubaa9) 19:00:00 ~ 21:00:00",
-    registeredAt: "2026-05-05 19:29",
-    status: "\uc811\uc218\uc644\ub8cc",
-    approval: "OK"
-  }),
-  createTestHistory({
-    id: "11131",
-    type: "\uc790\uc720\uba58\ud1a0\ub9c1",
-    title: "\uce60\uc0bc\uc774\ud300 \uc790\uc720\uba58\ud1a0\ub9c1",
-    mentor: "\uac15\ub300\uaddc",
-    lectureDate: "2026-05-02(\ud1a0) 16:00:00 ~ 18:00:00",
-    registeredAt: "2026-05-02 15:15",
-    status: "\uc811\uc218\uc644\ub8cc",
-    approval: "OK"
-  }),
-  createTestHistory({
-    id: "11099",
-    type: "\uc790\uc720\uba58\ud1a0\ub9c1",
-    title:
-      "\ud504\ub85c\uc81d\ud2b8 \uc544\uc774\ub514\uc5d0\uc774\uc158 \ubc0f \uae30\ud68d \ud53c\ub4dc\ubc31",
-    mentor: "\uae40\uad00\uc601",
-    lectureDate: "2026-05-09(\ud1a0) 17:00:00 ~ 20:00:00",
-    registeredAt: "2026-05-01 22:27",
-    status: "\uc811\uc218\uc644\ub8cc",
-    approval: "OK"
-  }),
-  createTestHistory({
-    id: "11082",
-    type: "\uc790\uc720\uba58\ud1a0\ub9c1",
-    title: "\uce60\uc0bc\uc774 \ud300 \uba58\ud1a0\ub9c1",
-    mentor: "\ubc15\uc815\ub450",
-    lectureDate: "2026-05-02(\ud1a0) 19:00:00 ~ 20:00:00",
-    registeredAt: "2026-05-01 20:23",
-    status: "\uc811\uc218\uc644\ub8cc",
-    approval: "OK"
-  }),
-  createTestHistory({
-    id: "11033",
-    type: "\uc790\uc720\uba58\ud1a0\ub9c1",
-    title: "SDUI(Server Driven UI) \uc785\ubb38 : \ucee8\uc149\uacfc \ud65c\uc6a9",
-    mentor: "\uac15\ub300\uaddc",
-    lectureDate: "2026-05-02(\ud1a0) 10:00:00 ~ 12:00:00",
-    registeredAt: "2026-05-01 11:37",
-    status: "\uc811\uc218\uc644\ub8cc",
-    approval: "OK"
-  }),
-  createTestHistory({
-    id: "10997",
-    type: "\uc790\uc720\uba58\ud1a0\ub9c1",
-    title:
-      "\ubc15\uc131\ud604 \uba58\ud2f0\ud300 \uc544\uc774\ub514\uc5b4 \ubc0f \uba58\ud1a0\ub9c1 \ubc29\ud5a5\uc131 \ub17c\uc758",
-    mentor: "\uae40\ud55c\ube5b",
-    lectureDate: "2026-05-03(\uc77c) 14:00:00 ~ 16:00:00",
-    registeredAt: "2026-04-30 14:13",
-    status: "\uc811\uc218\uc644\ub8cc",
-    approval: "-"
-  }),
-  createTestHistory({
-    id: "10940",
-    type: "\uc790\uc720\uba58\ud1a0\ub9c1",
-    title:
-      "\ud300\ub9e4\uce6d\uc744 \uc704\ud55c \uc790\uc720\uba58\ud1a0\ub9c1 + \uc544\uc774\ub370\uc774\uc158 + \ucee4\ud53c\ucc57 feat(\uce60\uc0bc\uc774)",
-    mentor: "\uc804\uac00\ube48",
-    lectureDate: "2026-05-02(\ud1a0) 23:00:00 ~ 24:00:00",
-    registeredAt: "2026-04-29 14:43",
-    status: "\uc811\uc218\uc644\ub8cc",
-    approval: "OK"
-  }),
-  createTestHistory({
-    id: "10751",
-    type: "\uc790\uc720\uba58\ud1a0\ub9c1",
-    title: "\ud300\ub2e8\uc704 \ud504\ub85c\uc81d\ud2b8 \uae30\ud68d \ud53c\ub4dc\ubc31",
-    mentor: "\uae40\uad00\uc601",
-    lectureDate: "2026-04-30(\ubaa9) 19:00:00 ~ 20:00:00",
-    registeredAt: "2026-04-26 15:25",
-    status: "\uc811\uc218\uc644\ub8cc",
-    approval: "OK"
-  }),
-  createTestHistory({
-    id: "10684",
-    type: "\uc790\uc720\uba58\ud1a0\ub9c1",
-    title: "\uce60\uc0bc\uc774 \uba58\ud1a0\ub9c1",
-    mentor: "\uae40\ub3c4\uc601",
-    lectureDate: "2026-05-01(\uae08) 13:00:00 ~ 14:00:00",
-    registeredAt: "2026-04-25 09:55",
-    status: "\uc811\uc218\uc644\ub8cc",
-    approval: "OK"
-  })
-];
 
 chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   if (message?.type !== "GET_PAGE_CONTEXT") {
@@ -122,9 +16,9 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
         title: document.title,
         body: getText(document.body).slice(0, 2000),
         url: window.location.href,
-        courseHistories: TEST_HISTORIES,
+        courseHistories: [],
         scrapeError: error.message,
-        usingTestHistories: true
+        scrapeStatus: "failed"
       });
     });
 
@@ -143,27 +37,15 @@ async function buildPageContext() {
     };
   }
 
-  if (USE_TEST_HISTORIES) {
-    return {
-      allowed: true,
-      title: document.title,
-      body: getText(document.body).slice(0, 2000),
-      url,
-      courseHistories: TEST_HISTORIES,
-      usingTestHistories: true
-    };
-  }
-
   const scrapedHistories = await scrapeAllHistoryPages(document, url);
-  const courseHistories = scrapedHistories.length > 0 ? scrapedHistories : TEST_HISTORIES;
 
   return {
     allowed: true,
     title: document.title,
     body: getText(document.body).slice(0, 2000),
     url,
-    courseHistories,
-    usingTestHistories: scrapedHistories.length === 0
+    courseHistories: scrapedHistories,
+    scrapeStatus: "success"
   };
 }
 
@@ -286,18 +168,6 @@ function scrapeHistoryRow(row, pageUrl) {
   };
 }
 
-function createTestHistory(history) {
-  const url = `https://${HISTORY_HOST}/sw/mypage/mentoLec/view.do?qustnrSn=${history.id}&menuNo=200046&history=y`;
-
-  return {
-    url,
-    title: `[${history.type}] ${history.title}`,
-    body: createHistoryBody(history),
-    mentor: history.mentor,
-    taken_at: parseDateTime(history.registeredAt) || new Date().toISOString()
-  };
-}
-
 function createHistoryBody(history) {
   return [
     ["\uad6c\ubd84", history.type],
@@ -351,7 +221,7 @@ function isAllowedPageUrl(url) {
   try {
     const parsedUrl = new URL(url);
     return (
-      parsedUrl.hostname === HISTORY_HOST &&
+      HISTORY_HOSTS.includes(parsedUrl.hostname) &&
       parsedUrl.pathname === HISTORY_PATH &&
       parsedUrl.searchParams.get("menuNo") === HISTORY_MENU_NO
     );

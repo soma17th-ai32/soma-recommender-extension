@@ -1,117 +1,10 @@
 import { requestRecommendations } from "../api/recommendations.js";
 import { isAllowedPageUrl } from "../config.js";
 
-const pageTitle = document.querySelector("#page-title");
 const recommendButton = document.querySelector("#recommend-button");
 const result = document.querySelector("#result");
-const COURSE_HISTORY_LOAD_FAILED_MESSAGE =
-  "\uc218\uac15 \uc774\ub825\uc744 \ubd88\ub7ec\uc624\uc9c0 \ubabb\ud588\uc2b5\ub2c8\ub2e4.";
-const USE_TEST_HISTORIES = true;
-const TEST_HISTORIES = [
-  createTestHistory({
-    id: "11349",
-    type: "\uc790\uc720\uba58\ud1a0\ub9c1",
-    title: "\ud300 \uce60\uc0bc\uc774 - \uba58\ud1a0\uc18c\uac1c, \uba58\ud1a0\ub9c1\ubc29\ud5a5",
-    mentor: "\uc7a5\uc9c4\uc601(6236)",
-    lectureDate: "2026-05-09(\ud1a0) 11:00:00 ~ 12:00:00",
-    registeredAt: "2026-05-06 22:22",
-    status: "\uc811\uc218\uc644\ub8cc",
-    approval: "OK"
-  }),
-  createTestHistory({
-    id: "11278",
-    type: "\uba58\ud1a0\ud2b9\uac15",
-    title: "[Mobile Class] 2026 ASM Mobile Class - KickOff/OT",
-    mentor: "\uae40\uc885\ucc2c",
-    lectureDate: "2026-05-07(\ubaa9) 19:00:00 ~ 21:00:00",
-    registeredAt: "2026-05-05 19:29",
-    status: "\uc811\uc218\uc644\ub8cc",
-    approval: "OK"
-  }),
-  createTestHistory({
-    id: "11131",
-    type: "\uc790\uc720\uba58\ud1a0\ub9c1",
-    title: "\uce60\uc0bc\uc774\ud300 \uc790\uc720\uba58\ud1a0\ub9c1",
-    mentor: "\uac15\ub300\uaddc",
-    lectureDate: "2026-05-02(\ud1a0) 16:00:00 ~ 18:00:00",
-    registeredAt: "2026-05-02 15:15",
-    status: "\uc811\uc218\uc644\ub8cc",
-    approval: "OK"
-  }),
-  createTestHistory({
-    id: "11099",
-    type: "\uc790\uc720\uba58\ud1a0\ub9c1",
-    title:
-      "\ud504\ub85c\uc81d\ud2b8 \uc544\uc774\ub514\uc5d0\uc774\uc158 \ubc0f \uae30\ud68d \ud53c\ub4dc\ubc31",
-    mentor: "\uae40\uad00\uc601",
-    lectureDate: "2026-05-09(\ud1a0) 17:00:00 ~ 20:00:00",
-    registeredAt: "2026-05-01 22:27",
-    status: "\uc811\uc218\uc644\ub8cc",
-    approval: "OK"
-  }),
-  createTestHistory({
-    id: "11082",
-    type: "\uc790\uc720\uba58\ud1a0\ub9c1",
-    title: "\uce60\uc0bc\uc774 \ud300 \uba58\ud1a0\ub9c1",
-    mentor: "\ubc15\uc815\ub450",
-    lectureDate: "2026-05-02(\ud1a0) 19:00:00 ~ 20:00:00",
-    registeredAt: "2026-05-01 20:23",
-    status: "\uc811\uc218\uc644\ub8cc",
-    approval: "OK"
-  }),
-  createTestHistory({
-    id: "11033",
-    type: "\uc790\uc720\uba58\ud1a0\ub9c1",
-    title: "SDUI(Server Driven UI) \uc785\ubb38 : \ucee8\uc149\uacfc \ud65c\uc6a9",
-    mentor: "\uac15\ub300\uaddc",
-    lectureDate: "2026-05-02(\ud1a0) 10:00:00 ~ 12:00:00",
-    registeredAt: "2026-05-01 11:37",
-    status: "\uc811\uc218\uc644\ub8cc",
-    approval: "OK"
-  }),
-  createTestHistory({
-    id: "10997",
-    type: "\uc790\uc720\uba58\ud1a0\ub9c1",
-    title:
-      "\ubc15\uc131\ud604 \uba58\ud2f0\ud300 \uc544\uc774\ub514\uc5b4 \ubc0f \uba58\ud1a0\ub9c1 \ubc29\ud5a5\uc131 \ub17c\uc758",
-    mentor: "\uae40\ud55c\ube5b",
-    lectureDate: "2026-05-03(\uc77c) 14:00:00 ~ 16:00:00",
-    registeredAt: "2026-04-30 14:13",
-    status: "\uc811\uc218\uc644\ub8cc",
-    approval: "-"
-  }),
-  createTestHistory({
-    id: "10940",
-    type: "\uc790\uc720\uba58\ud1a0\ub9c1",
-    title:
-      "\ud300\ub9e4\uce6d\uc744 \uc704\ud55c \uc790\uc720\uba58\ud1a0\ub9c1 + \uc544\uc774\ub370\uc774\uc158 + \ucee4\ud53c\ucc57 feat(\uce60\uc0bc\uc774)",
-    mentor: "\uc804\uac00\ube48",
-    lectureDate: "2026-05-02(\ud1a0) 23:00:00 ~ 24:00:00",
-    registeredAt: "2026-04-29 14:43",
-    status: "\uc811\uc218\uc644\ub8cc",
-    approval: "OK"
-  }),
-  createTestHistory({
-    id: "10751",
-    type: "\uc790\uc720\uba58\ud1a0\ub9c1",
-    title: "\ud300\ub2e8\uc704 \ud504\ub85c\uc81d\ud2b8 \uae30\ud68d \ud53c\ub4dc\ubc31",
-    mentor: "\uae40\uad00\uc601",
-    lectureDate: "2026-04-30(\ubaa9) 19:00:00 ~ 20:00:00",
-    registeredAt: "2026-04-26 15:25",
-    status: "\uc811\uc218\uc644\ub8cc",
-    approval: "OK"
-  }),
-  createTestHistory({
-    id: "10684",
-    type: "\uc790\uc720\uba58\ud1a0\ub9c1",
-    title: "\uce60\uc0bc\uc774 \uba58\ud1a0\ub9c1",
-    mentor: "\uae40\ub3c4\uc601",
-    lectureDate: "2026-05-01(\uae08) 13:00:00 ~ 14:00:00",
-    registeredAt: "2026-04-25 09:55",
-    status: "\uc811\uc218\uc644\ub8cc",
-    approval: "OK"
-  })
-];
+const COURSE_HISTORY_LOAD_FAILED_MESSAGE = "수강 이력을 불러오지 못했습니다.";
+const HISTORY_PAGE_URL = "https://www.swmaestro.ai/sw/mypage/userAnswer/history.do?menuNo=200047";
 
 let currentPageContext = null;
 
@@ -128,108 +21,164 @@ async function loadPageContext() {
   const tab = await getActiveTab();
 
   if (!tab?.id) {
-    pageTitle.textContent =
-      "\ud65c\uc131 \ud0ed \uc815\ubcf4\ub97c \ucc3e\uc744 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4.";
     recommendButton.disabled = true;
+    renderMessage("활성 탭 정보를 찾을 수 없습니다.", "");
     return;
   }
 
-  const response = await getPageContextFromContentScript(tab.id);
-  const url = response?.url || tab.url;
-  const allowed = response?.allowed ?? isAllowedPageUrl(url);
-  const shouldUseTestHistories =
-    allowed &&
-    USE_TEST_HISTORIES &&
-    (!response?.courseHistories?.length || response.usingTestHistories);
+  const allowed = isAllowedPageUrl(tab.url);
 
   currentPageContext = {
     allowed,
-    title: response?.title || tab.title || "\uc81c\ubaa9 \uc5c6\ub294 \ud398\uc774\uc9c0",
-    body: response?.body,
-    url,
-    courseHistories: shouldUseTestHistories ? TEST_HISTORIES : response?.courseHistories || [],
-    scrapeError: response?.scrapeError,
-    usingTestHistories: shouldUseTestHistories || response?.usingTestHistories || false
+    title: tab.title || "제목 없는 페이지",
+    url: tab.url,
+    courseHistories: []
   };
-
-  pageTitle.textContent = currentPageContext.title;
 
   if (!allowed) {
     recommendButton.disabled = true;
-    renderMessage(
-      "\uc9c0\uc6d0\ud558\uc9c0 \uc54a\ub294 \ud398\uc774\uc9c0\uc785\ub2c8\ub2e4.",
-      "SW \ub9c8\uc5d0\uc2a4\ud2b8\ub85c \uc811\uc218\ub0b4\uc5ed \ud398\uc774\uc9c0\uc5d0\uc11c\ub9cc \ucd94\ucc9c\uc744 \uc694\uccad\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4."
-    );
+    renderUnsupportedPageMessage();
     return;
   }
 
-  if (currentPageContext.scrapeError && !currentPageContext.usingTestHistories) {
-    renderMessage(COURSE_HISTORY_LOAD_FAILED_MESSAGE, "");
-    return;
-  }
-
-  if (currentPageContext.usingTestHistories) {
-    renderMessage(
-      "\ud14c\uc2a4\ud2b8 \uc218\uac15 \uc774\ub825 \uc900\ube44 \uc644\ub8cc",
-      `\ud14c\uc2a4\ud2b8 \uc218\uac15 \uc774\ub825 ${currentPageContext.courseHistories.length}\uac1c\ub97c \uc0ac\uc6a9\ud569\ub2c8\ub2e4.`
-    );
-    return;
-  }
-
+  recommendButton.disabled = false;
   renderMessage(
-    "\uc218\uac15 \uc774\ub825 \uc900\ube44 \uc644\ub8cc",
-    `${currentPageContext.courseHistories.length}\uac1c\uc758 \uc218\uac15 \uc774\ub825\uc744 \ucc3e\uc558\uc2b5\ub2c8\ub2e4.`
+    "추천 준비 완료",
+    "추천 받기를 누르면 현재 페이지의 수강 이력을 스크래핑한 뒤 추천을 요청합니다."
   );
 }
 
 recommendButton.addEventListener("click", async () => {
   recommendButton.disabled = true;
-  recommendButton.textContent = "\ucd94\ucc9c \uc694\uccad \uc911...";
   result.hidden = false;
 
   try {
-    const histories = createHistoriesFromPageContext(currentPageContext);
+    recommendButton.textContent = "수강 이력 스크래핑 중...";
+    renderLoadingMessage(
+      "수강 이력 스크래핑 중",
+      "현재 페이지와 접수내역 페이지들을 확인하고 있습니다."
+    );
+    const tab = await getActiveTab();
+    const pageContext = await scrapePageContext(tab);
+    const histories = createHistoriesFromPageContext(pageContext);
+
+    currentPageContext = pageContext;
+    recommendButton.textContent = "추천 요청 중...";
+    renderRecommendationRequestMessage(histories);
+
     const recommendation = await requestRecommendations({
       histories,
       limit: 10
     });
 
-    renderRecommendationResult(recommendation);
+    renderRecommendationResult(recommendation, histories);
   } catch (error) {
     renderError(error);
   } finally {
-    recommendButton.disabled = false;
-    recommendButton.textContent = "\ucd94\ucc9c \ubc1b\uae30";
+    recommendButton.disabled = !currentPageContext?.allowed;
+    recommendButton.textContent = "추천 받기";
   }
 });
 
 loadPageContext().catch(() => {
-  pageTitle.textContent =
-    "\ud604\uc7ac \ud398\uc774\uc9c0 \uc815\ubcf4\ub97c \ubd88\ub7ec\uc624\uc9c0 \ubabb\ud588\uc2b5\ub2c8\ub2e4.";
   recommendButton.disabled = true;
+  renderMessage("현재 페이지 정보를 불러오지 못했습니다.", "");
 });
 
-async function getPageContextFromContentScript(tabId) {
-  try {
-    return await chrome.tabs.sendMessage(tabId, {
-      type: "GET_PAGE_CONTEXT"
-    });
-  } catch {
-    return null;
+async function scrapePageContext(tab) {
+  if (!tab?.id) {
+    throw new Error("활성 탭 정보를 찾을 수 없습니다.");
   }
+
+  const response = await getPageContextFromContentScript(tab);
+  const url = response?.url || tab.url;
+  const allowed = response?.allowed ?? isAllowedPageUrl(url);
+
+  if (!allowed) {
+    return {
+      allowed: false,
+      title: response?.title || tab.title || "제목 없는 페이지",
+      url,
+      courseHistories: []
+    };
+  }
+
+  if (!response) {
+    throw createContentScriptCommunicationError(tab, "스크래핑 응답이 비어 있습니다.");
+  }
+
+  return {
+    allowed,
+    title: response.title || tab.title || "제목 없는 페이지",
+    body: response.body,
+    url,
+    courseHistories: response.courseHistories || [],
+    scrapeError: response.scrapeError,
+    scrapeStatus: response.scrapeStatus
+  };
+}
+
+async function getPageContextFromContentScript(tab) {
+  try {
+    return await requestPageContext(tab);
+  } catch (firstError) {
+    try {
+      await injectContentScript(tab);
+      return await requestPageContext(tab);
+    } catch (secondError) {
+      throw createContentScriptCommunicationError(
+        tab,
+        "콘텐츠 스크립트 자동 주입 후에도 통신하지 못했습니다.",
+        [firstError.message, secondError.message]
+      );
+    }
+  }
+}
+
+async function requestPageContext(tab) {
+  return await chrome.tabs.sendMessage(tab.id, {
+    type: "GET_PAGE_CONTEXT"
+  });
+}
+
+async function injectContentScript(tab) {
+  await chrome.scripting.executeScript({
+    target: {
+      tabId: tab.id
+    },
+    files: ["src/content.js"]
+  });
+}
+
+function createContentScriptCommunicationError(tab, reason, causes = []) {
+  const runtimeError = chrome.runtime?.lastError?.message;
+  const details = [
+    `탭 ID: ${tab?.id || "없음"}`,
+    `탭 URL: ${tab?.url || "없음"}`,
+    `원인: ${reason || runtimeError || "알 수 없는 통신 오류"}`,
+    ...causes.filter(Boolean).map((cause) => `세부 원인: ${cause}`),
+    "확장 프로그램을 새로고침한 뒤 SW Maestro 페이지도 다시 새로고침해 주세요.",
+    "주소가 /sw/mypage/userAnswer/history.do?menuNo=200047 형태인지 확인해 주세요."
+  ];
+  const error = new Error("페이지 스크래핑 스크립트와 통신하지 못했습니다.");
+
+  error.code = "CONTENT_SCRIPT_COMMUNICATION_FAILED";
+  error.details = details;
+
+  return error;
 }
 
 function createHistoriesFromPageContext(pageContext) {
   if (!pageContext?.url) {
-    throw new Error(
-      "\ucd94\ucc9c \uc694\uccad\uc5d0 \uc0ac\uc6a9\ud560 \ud398\uc774\uc9c0 URL\uc774 \uc5c6\uc2b5\ub2c8\ub2e4."
-    );
+    throw new Error("추천 요청에 사용할 페이지 URL이 없습니다.");
   }
 
   if (!pageContext.allowed) {
-    throw new Error(
-      "\uc124\uc815\ub41c URL\uc5d0\uc11c\ub9cc \ucd94\ucc9c\uc744 \uc694\uccad\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4."
-    );
+    throw new Error("설정된 URL에서만 추천을 요청할 수 있습니다.");
+  }
+
+  if (pageContext.scrapeError) {
+    throw new Error(pageContext.scrapeError);
   }
 
   if (pageContext.courseHistories?.length > 0) {
@@ -239,73 +188,25 @@ function createHistoriesFromPageContext(pageContext) {
   throw new Error(COURSE_HISTORY_LOAD_FAILED_MESSAGE);
 }
 
-function createTestHistory(history) {
-  const url = `https://www.swmaestro.ai/sw/mypage/mentoLec/view.do?qustnrSn=${history.id}&menuNo=200046&history=y`;
-
-  return {
-    url,
-    title: `[${history.type}] ${history.title}`,
-    body: createHistoryBody(history),
-    mentor: history.mentor,
-    taken_at: parseDateTime(history.registeredAt) || new Date().toISOString()
-  };
-}
-
-function createHistoryBody(history) {
-  return [
-    ["\uad6c\ubd84", history.type],
-    ["\uc81c\ubaa9", history.title],
-    ["\uc791\uc131\uc790", history.mentor],
-    ["\uac15\uc758\ub0a0\uc9dc", history.lectureDate],
-    ["\uc811\uc218\uc77c", history.registeredAt],
-    ["\uc811\uc218\uc0c1\ud0dc", history.status],
-    ["\uac1c\uc124\uc2b9\uc778", history.approval]
-  ]
-    .filter(([, value]) => value && value !== "-")
-    .map(([label, value]) => `${label}: ${value}`)
-    .join("\n");
-}
-
-function parseDateTime(value = "") {
-  const match = String(value).match(
-    /(?<year>\d{4})-(?<month>\d{1,2})-(?<day>\d{1,2})(?:\s+(?<hour>\d{1,2}):(?<minute>\d{1,2}))?/
-  );
-
-  if (!match?.groups) {
-    return null;
-  }
-
-  const { year, month, day, hour = "0", minute = "0" } = match.groups;
-  const date = new Date(Number(year), Number(month) - 1, Number(day), Number(hour), Number(minute));
-
-  return Number.isNaN(date.getTime()) ? null : date.toISOString();
-}
-
-function renderMessage(title, message) {
-  result.hidden = false;
-  result.innerHTML = `
-    <p class="result-title">${escapeHtml(title)}</p>
-    ${message ? `<p class="result-meta">${escapeHtml(message)}</p>` : ""}
-  `;
-}
-
-function renderRecommendationResult(recommendation) {
+function renderRecommendationResult(recommendation, histories = []) {
   const items = recommendation.items || [];
 
   if (items.length === 0) {
     result.innerHTML = `
-      <p class="result-title">\ucd94\ucc9c \uacb0\uacfc\uac00 \uc5c6\uc2b5\ub2c8\ub2e4.</p>
-      <p class="result-meta">${escapeHtml(recommendation.interest_summary || "\uad00\uc2ec\uc0ac \uc694\uc57d\uc774 \uc5c6\uc2b5\ub2c8\ub2e4.")}</p>
+      <p class="result-title">추천 결과가 없습니다.</p>
+      <p class="result-meta">${escapeHtml(recommendation.interest_summary || "관심사 요약이 없습니다.")}</p>
+      ${renderScrapedHistoryDetails(histories)}
     `;
     return;
   }
 
   result.innerHTML = `
-    <p class="result-title">\ucd94\ucc9c \uacb0\uacfc ${items.length}\uac1c</p>
+    <p class="result-title">추천 결과 ${items.length}개</p>
     <p class="result-meta">${escapeHtml(recommendation.interest_summary)}</p>
     <ul class="recommendation-list">
       ${items.map(renderRecommendationItem).join("")}
     </ul>
+    ${renderScrapedHistoryDetails(histories)}
   `;
 }
 
@@ -321,11 +222,117 @@ function renderRecommendationItem(item) {
   `;
 }
 
+function renderMessage(title, message) {
+  result.hidden = false;
+  result.innerHTML = `
+    <p class="result-title">${escapeHtml(title)}</p>
+    ${message ? `<p class="result-meta">${escapeHtml(message)}</p>` : ""}
+  `;
+}
+
+function renderLoadingMessage(title, message) {
+  result.hidden = false;
+  result.innerHTML = `
+    ${renderLoadingHeader(title)}
+    ${message ? `<p class="result-meta">${escapeHtml(message)}</p>` : ""}
+  `;
+}
+
+function renderUnsupportedPageMessage() {
+  result.hidden = false;
+  result.innerHTML = `
+    <p class="result-title">추천할 수 없는 페이지입니다.</p>
+    <p class="result-meta">SW 마에스트로 접수내역 페이지에서 수강 이력을 기반으로 추천을 받을 수 있습니다.</p>
+    <a class="page-link" href="${escapeAttribute(HISTORY_PAGE_URL)}" target="_blank" rel="noreferrer">
+      접수내역 페이지로 이동
+    </a>
+  `;
+}
+
+function renderRecommendationRequestMessage(histories) {
+  result.hidden = false;
+  result.innerHTML = `
+    ${renderLoadingHeader("추천 요청 중")}
+    <p class="result-meta">${histories.length}개의 수강 이력을 기반으로 추천을 요청하고 있습니다.</p>
+    ${renderScrapedHistoryDetails(histories, true)}
+  `;
+}
+
+function renderLoadingHeader(title) {
+  return `
+    <div class="loading-header" role="status" aria-live="polite">
+      <span class="loading-spinner" aria-hidden="true"></span>
+      <p class="result-title">${escapeHtml(title)}<span class="loading-dots" aria-hidden="true"></span></p>
+    </div>
+  `;
+}
+
+function renderScrapedHistoryDetails(histories, open = false) {
+  if (!histories.length) {
+    return "";
+  }
+
+  const carouselItems = [...histories, ...histories];
+
+  return `
+    <section class="scraped-history" aria-label="스크래핑된 수강 이력">
+      <div class="scraped-history-header">
+        <p>사용자의 수강 이력 ${histories.length}개</p>
+        <span>${open ? "나의 수강 이력" : "추천에 사용된 이력"}</span>
+      </div>
+      <div class="scraped-history-carousel">
+        <ol class="scraped-history-list">
+          ${carouselItems.map((history, index) => renderScrapedHistoryItem(history, index >= histories.length)).join("")}
+        </ol>
+      </div>
+    </section>
+  `;
+}
+
+function renderScrapedHistoryItem(history, duplicated = false) {
+  const title = history.title || "제목 없음";
+  const mentor = history.mentor || "-";
+  const takenAt = history.taken_at || "-";
+  const body = history.body || "상세 내용이 없습니다.";
+
+  return `
+    <li ${duplicated ? 'aria-hidden="true"' : ""}>
+      <details class="scraped-history-item">
+        <summary>
+          <span class="scraped-history-title">${escapeHtml(title)}</span>
+          <span class="scraped-history-preview">${escapeHtml(body)}</span>
+        </summary>
+        <div class="scraped-history-body">
+          <a href="${escapeAttribute(history.url || "#")}" target="_blank" rel="noreferrer">
+            원본 페이지 열기
+          </a>
+          <p>멘토: ${escapeHtml(mentor)}</p>
+          <p>기준 시각: ${escapeHtml(takenAt)}</p>
+          <pre>${escapeHtml(body)}</pre>
+        </div>
+      </details>
+    </li>
+  `;
+}
+
 function renderError(error) {
   result.innerHTML = `
-    <p class="result-title">\ucd94\ucc9c \uc694\uccad\uc5d0 \uc2e4\ud328\ud588\uc2b5\ub2c8\ub2e4.</p>
+    <p class="result-title">추천 요청에 실패했습니다.</p>
     <p class="result-meta">${escapeHtml(error.message)}</p>
     ${error.code ? `<p class="result-code">${escapeHtml(error.code)}</p>` : ""}
+    ${renderErrorDetails(error)}
+  `;
+}
+
+function renderErrorDetails(error) {
+  if (!error.details?.length) {
+    return "";
+  }
+
+  return `
+    <ul class="result-details">
+      ${error.details.map((detail) => `<li>${escapeHtml(detail)}</li>`).join("")}
+    </ul>
   `;
 }
 

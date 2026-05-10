@@ -12,13 +12,17 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://www.swmaestro.ai/sw/mypage/userAnswer/history.do*"],
+      "matches": [
+        "https://www.swmaestro.ai/sw/mypage/userAnswer/history.do*",
+        "https://swmaestro.ai/sw/mypage/userAnswer/history.do*"
+      ],
       "js": ["src/content.js"]
     }
   ],
-  "permissions": ["storage", "activeTab"],
+  "permissions": ["storage", "activeTab", "scripting"],
   "host_permissions": [
     "https://www.swmaestro.ai/sw/mypage/userAnswer/history.do*",
+    "https://swmaestro.ai/sw/mypage/userAnswer/history.do*",
     "http://localhost:8000/*",
     "http://127.0.0.1:8000/*"
   ]
