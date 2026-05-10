@@ -31,7 +31,8 @@ async function parseJsonResponse(response) {
 
 function createRecommendationError(payload, status) {
   const error = new Error(
-    payload?.error?.message || `Recommendation request failed. Status code: ${status}`
+    payload?.error?.message ||
+      `\ucd94\ucc9c \uc694\uccad\uc5d0 \uc2e4\ud328\ud588\uc2b5\ub2c8\ub2e4. \uc0c1\ud0dc \ucf54\ub4dc: ${status}`
   );
 
   error.code = payload?.error?.code || "RECOMMENDATION_REQUEST_FAILED";

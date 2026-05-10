@@ -6,102 +6,105 @@ const USE_TEST_HISTORIES = true;
 const TEST_HISTORIES = [
   createTestHistory({
     id: "11349",
-    type: "free-mentoring",
-    title: "Team Chilsami - mentor introduction and mentoring direction",
-    mentor: "Jang Jinyoung",
-    lectureDate: "2026-05-09 11:00:00 ~ 12:00:00",
+    type: "\uc790\uc720\uba58\ud1a0\ub9c1",
+    title: "\ud300 \uce60\uc0bc\uc774 - \uba58\ud1a0\uc18c\uac1c, \uba58\ud1a0\ub9c1\ubc29\ud5a5",
+    mentor: "\uc7a5\uc9c4\uc601(6236)",
+    lectureDate: "2026-05-09(\ud1a0) 11:00:00 ~ 12:00:00",
     registeredAt: "2026-05-06 22:22",
-    status: "accepted",
+    status: "\uc811\uc218\uc644\ub8cc",
     approval: "OK"
   }),
   createTestHistory({
     id: "11278",
-    type: "mentor-lecture",
+    type: "\uba58\ud1a0\ud2b9\uac15",
     title: "2026 ASM Mobile Class - KickOff and OT",
-    mentor: "Kim Jongchan",
-    lectureDate: "2026-05-07 19:00:00 ~ 21:00:00",
+    mentor: "\uae40\uc885\ucc2c",
+    lectureDate: "2026-05-07(\ubaa9) 19:00:00 ~ 21:00:00",
     registeredAt: "2026-05-05 19:29",
-    status: "accepted",
+    status: "\uc811\uc218\uc644\ub8cc",
     approval: "OK"
   }),
   createTestHistory({
     id: "11131",
-    type: "free-mentoring",
-    title: "Chilsami team free mentoring",
-    mentor: "Kang Daegyu",
-    lectureDate: "2026-05-02 16:00:00 ~ 18:00:00",
+    type: "\uc790\uc720\uba58\ud1a0\ub9c1",
+    title: "\uce60\uc0bc\uc774\ud300 \uc790\uc720\uba58\ud1a0\ub9c1",
+    mentor: "\uac15\ub300\uaddc",
+    lectureDate: "2026-05-02(\ud1a0) 16:00:00 ~ 18:00:00",
     registeredAt: "2026-05-02 15:15",
-    status: "accepted",
+    status: "\uc811\uc218\uc644\ub8cc",
     approval: "OK"
   }),
   createTestHistory({
     id: "11099",
-    type: "free-mentoring",
-    title: "Project ideation and planning feedback",
-    mentor: "Kim Gwanyoung",
-    lectureDate: "2026-05-09 17:00:00 ~ 20:00:00",
+    type: "\uc790\uc720\uba58\ud1a0\ub9c1",
+    title:
+      "\ud504\ub85c\uc81d\ud2b8 \uc544\uc774\ub514\uc5d0\uc774\uc158 \ubc0f \uae30\ud68d \ud53c\ub4dc\ubc31",
+    mentor: "\uae40\uad00\uc601",
+    lectureDate: "2026-05-09(\ud1a0) 17:00:00 ~ 20:00:00",
     registeredAt: "2026-05-01 22:27",
-    status: "accepted",
+    status: "\uc811\uc218\uc644\ub8cc",
     approval: "OK"
   }),
   createTestHistory({
     id: "11082",
-    type: "free-mentoring",
-    title: "Chilsami team mentoring",
-    mentor: "Park Jungdoo",
-    lectureDate: "2026-05-02 19:00:00 ~ 20:00:00",
+    type: "\uc790\uc720\uba58\ud1a0\ub9c1",
+    title: "\uce60\uc0bc\uc774 \ud300 \uba58\ud1a0\ub9c1",
+    mentor: "\ubc15\uc815\ub450",
+    lectureDate: "2026-05-02(\ud1a0) 19:00:00 ~ 20:00:00",
     registeredAt: "2026-05-01 20:23",
-    status: "accepted",
+    status: "\uc811\uc218\uc644\ub8cc",
     approval: "OK"
   }),
   createTestHistory({
     id: "11033",
-    type: "free-mentoring",
-    title: "Server Driven UI introduction: concept and application",
-    mentor: "Kang Daegyu",
-    lectureDate: "2026-05-02 10:00:00 ~ 12:00:00",
+    type: "\uc790\uc720\uba58\ud1a0\ub9c1",
+    title: "SDUI(Server Driven UI) \uc785\ubb38 : \ucee8\uc149\uacfc \ud65c\uc6a9",
+    mentor: "\uac15\ub300\uaddc",
+    lectureDate: "2026-05-02(\ud1a0) 10:00:00 ~ 12:00:00",
     registeredAt: "2026-05-01 11:37",
-    status: "accepted",
+    status: "\uc811\uc218\uc644\ub8cc",
     approval: "OK"
   }),
   createTestHistory({
     id: "10997",
-    type: "free-mentoring",
-    title: "Idea and mentoring direction discussion for Park Sunghyun mentee team",
-    mentor: "Kim Hanbit",
-    lectureDate: "2026-05-03 14:00:00 ~ 16:00:00",
+    type: "\uc790\uc720\uba58\ud1a0\ub9c1",
+    title:
+      "\ubc15\uc131\ud604 \uba58\ud2f0\ud300 \uc544\uc774\ub514\uc5b4 \ubc0f \uba58\ud1a0\ub9c1 \ubc29\ud5a5\uc131 \ub17c\uc758",
+    mentor: "\uae40\ud55c\ube5b",
+    lectureDate: "2026-05-03(\uc77c) 14:00:00 ~ 16:00:00",
     registeredAt: "2026-04-30 14:13",
-    status: "accepted",
+    status: "\uc811\uc218\uc644\ub8cc",
     approval: "-"
   }),
   createTestHistory({
     id: "10940",
-    type: "free-mentoring",
-    title: "Free mentoring, ideation, and coffee chat for team matching",
-    mentor: "Jeon Gabin",
-    lectureDate: "2026-05-02 23:00:00 ~ 24:00:00",
+    type: "\uc790\uc720\uba58\ud1a0\ub9c1",
+    title:
+      "\ud300\ub9e4\uce6d\uc744 \uc704\ud55c \uc790\uc720\uba58\ud1a0\ub9c1 + \uc544\uc774\ub370\uc774\uc158 + \ucee4\ud53c\ucc57 feat(\uce60\uc0bc\uc774)",
+    mentor: "\uc804\uac00\ube48",
+    lectureDate: "2026-05-02(\ud1a0) 23:00:00 ~ 24:00:00",
     registeredAt: "2026-04-29 14:43",
-    status: "accepted",
+    status: "\uc811\uc218\uc644\ub8cc",
     approval: "OK"
   }),
   createTestHistory({
     id: "10751",
-    type: "free-mentoring",
-    title: "Team project planning feedback",
-    mentor: "Kim Gwanyoung",
-    lectureDate: "2026-04-30 19:00:00 ~ 20:00:00",
+    type: "\uc790\uc720\uba58\ud1a0\ub9c1",
+    title: "\ud300\ub2e8\uc704 \ud504\ub85c\uc81d\ud2b8 \uae30\ud68d \ud53c\ub4dc\ubc31",
+    mentor: "\uae40\uad00\uc601",
+    lectureDate: "2026-04-30(\ubaa9) 19:00:00 ~ 20:00:00",
     registeredAt: "2026-04-26 15:25",
-    status: "accepted",
+    status: "\uc811\uc218\uc644\ub8cc",
     approval: "OK"
   }),
   createTestHistory({
     id: "10684",
-    type: "free-mentoring",
-    title: "Chilsami mentoring",
-    mentor: "Kim Doyoung",
-    lectureDate: "2026-05-01 13:00:00 ~ 14:00:00",
+    type: "\uc790\uc720\uba58\ud1a0\ub9c1",
+    title: "\uce60\uc0bc\uc774 \uba58\ud1a0\ub9c1",
+    mentor: "\uae40\ub3c4\uc601",
+    lectureDate: "2026-05-01(\uae08) 13:00:00 ~ 14:00:00",
     registeredAt: "2026-04-25 09:55",
-    status: "accepted",
+    status: "\uc811\uc218\uc644\ub8cc",
     approval: "OK"
   })
 ];
@@ -297,15 +300,15 @@ function createTestHistory(history) {
 
 function createHistoryBody(history) {
   return [
-    ["type", history.type],
-    ["title", history.title],
-    ["author", history.mentor],
-    ["lecture_date", history.lectureDate],
-    ["registered_at", history.registeredAt],
-    ["status", history.status],
-    ["approval", history.approval],
-    ["answer_history", history.answerHistory],
-    ["note", history.note]
+    ["\uad6c\ubd84", history.type],
+    ["\uc81c\ubaa9", history.title],
+    ["\uc791\uc131\uc790", history.mentor],
+    ["\uac15\uc758\ub0a0\uc9dc", history.lectureDate],
+    ["\uc811\uc218\uc77c", history.registeredAt],
+    ["\uc811\uc218\uc0c1\ud0dc", history.status],
+    ["\uac1c\uc124\uc2b9\uc778", history.approval],
+    ["\uc811\uc218\ub0b4\uc5ed", history.answerHistory],
+    ["\ube44\uace0", history.note]
   ]
     .filter(([, value]) => value && value !== "-")
     .map(([label, value]) => `${label}: ${value}`)
