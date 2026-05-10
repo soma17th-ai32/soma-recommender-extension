@@ -31,7 +31,7 @@ async function parseJsonResponse(response) {
 
 function createRecommendationError(payload, status) {
   const error = new Error(
-    payload?.error?.message || `추천 요청에 실패했습니다. 상태 코드: ${status}`
+    payload?.error?.message || `Recommendation request failed. Status code: ${status}`
   );
 
   error.code = payload?.error?.code || "RECOMMENDATION_REQUEST_FAILED";
